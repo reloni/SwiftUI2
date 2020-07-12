@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E25420824BB1515001AC53E /* GridWithMatchedGeometryEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E25420724BB1515001AC53E /* GridWithMatchedGeometryEffect.swift */; };
 		6E636F3324B259AA00E6B0EC /* SwiftUI2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E636F3224B259AA00E6B0EC /* SwiftUI2App.swift */; };
 		6E636F3524B259AA00E6B0EC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E636F3424B259AA00E6B0EC /* ContentView.swift */; };
 		6E636F3724B259AD00E6B0EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E636F3624B259AD00E6B0EC /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6E25420724BB1515001AC53E /* GridWithMatchedGeometryEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridWithMatchedGeometryEffect.swift; sourceTree = "<group>"; };
 		6E636F2F24B259AA00E6B0EC /* SwiftUI2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUI2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E636F3224B259AA00E6B0EC /* SwiftUI2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUI2App.swift; sourceTree = "<group>"; };
 		6E636F3424B259AA00E6B0EC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				6E636F3624B259AD00E6B0EC /* Assets.xcassets */,
 				6E636F3B24B259AD00E6B0EC /* Info.plist */,
 				6E636F3824B259AD00E6B0EC /* Preview Content */,
+				6E25420724BB1515001AC53E /* GridWithMatchedGeometryEffect.swift */,
 			);
 			path = SwiftUI2;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E25420824BB1515001AC53E /* GridWithMatchedGeometryEffect.swift in Sources */,
 				6E636F3524B259AA00E6B0EC /* ContentView.swift in Sources */,
 				6E636F3324B259AA00E6B0EC /* SwiftUI2App.swift in Sources */,
 			);
