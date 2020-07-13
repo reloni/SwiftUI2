@@ -16,16 +16,22 @@ struct PolygonShapeExample: View {
                 PolygonShape(sides: sides)
                     .stroke(Color.red, lineWidth: 3)
                     .padding(20)
-//                    .animation(.easeInOut(duration: 2.0))
-//                    .layoutPriority(1)
+                    .animation(.easeInOut(duration: 1.5))
+                    .layoutPriority(1)
                 
                 Text("Sides")
                 
                 HStack {
+                    Button("1") {
+                        self.sides = 1
+                    }
+                    .font(.title)
+                    .foregroundColor(Color.white)
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.green).shadow(radius: 2))
+                    
                     Button("3") {
-                        withAnimation(.easeInOut(duration: 2)) {
-                            self.sides = 3
-                        }
+                        self.sides = 3
                     }
                     .font(.title)
                     .foregroundColor(Color.white)
@@ -33,9 +39,7 @@ struct PolygonShapeExample: View {
                     .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.green).shadow(radius: 2))
                     
                     Button("4") {
-                        withAnimation(.easeInOut(duration: 2)) {
-                            self.sides = 4
-                        }
+                        self.sides = 4
                     }
                     .font(.title)
                     .foregroundColor(Color.white)
@@ -43,9 +47,7 @@ struct PolygonShapeExample: View {
                     .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.green).shadow(radius: 2))
                     
                     Button("5") {
-                        withAnimation(.easeInOut(duration: 2)) {
-                            self.sides = 5
-                        }
+                        self.sides = 5
                     }
                     .font(.title)
                     .foregroundColor(Color.white)
@@ -53,9 +55,7 @@ struct PolygonShapeExample: View {
                     .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.green).shadow(radius: 2))
                     
                     Button("20") {
-                        withAnimation(.easeInOut(duration: 2)) {
-                            self.sides = 20
-                        }
+                        self.sides = 20
                     }
                     .font(.title)
                     .foregroundColor(Color.white)
@@ -64,7 +64,7 @@ struct PolygonShapeExample: View {
                 }
                 .padding()
             }
-//            .navigationBarTitle("Shapes")
+            .navigationBarTitle("Shapes")
         }
     }
 }
@@ -79,13 +79,12 @@ struct PolygonShapeExample_Previews: PreviewProvider {
 struct PolygonShape: Shape {
     var sides: Double
     
-    var AnimatableData: Double {
+    var animatableData: Double {
         get { sides }
-        set { sides = newValue }
+        set { self.sides = newValue }
     }
     
     func path(in rect: CGRect) -> Path {
-        print("!")
         let hypotenuse = Double(min(rect.size.width, rect.size.height)) / 2.0
         
         let center = CGPoint(x: rect.size.width / 2.0, y: rect.size.height / 2.0)
