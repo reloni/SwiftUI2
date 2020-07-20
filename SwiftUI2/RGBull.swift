@@ -19,6 +19,8 @@ struct RGBullView: View {
     
     @State var showAlert = false
     
+    @ObservedObject var timer = TimeCounter()
+    
     var body: some View {
         VStack {
             HStack {
@@ -27,23 +29,36 @@ struct RGBullView: View {
                     Text("Match this color")
                 }
                 VStack {
-                    Color(red: rGuess, green: gGuess, blue: bGuess)
+                    ZStack(alignment: .center) {
+                        Color(red: rGuess, green: gGuess, blue: bGuess)
+                        Text("\(timer.counter)")
+                            .font(Font.system(.body, design: .monospaced))
+                            .padding(.all, 5)
+                            .background(Color.white)
+                            .foregroundColor(Color.black)
+                            .mask(Circle())
+                    }
                     Text("R: \(Int(rGuess * 255))  G: \(Int(gGuess * 255))  B: \(Int(bGuess * 255))")
                 }
             }
+            
             Button("Hit me") {
                 showAlert = true
+                timer.killTimer()
             }
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Your score"), message: Text(String(computeScore())))
             }
             .padding(.top)
             
-            RGBSlider(value: $rGuess, textColor: .red)
-            RGBSlider(value: $gGuess, textColor: .green)
-            RGBSlider(value: $bGuess, textColor: .blue)
+            VStack {
+                RGBSlider(value: $rGuess, textColor: .red)
+                RGBSlider(value: $gGuess, textColor: .green)
+                RGBSlider(value: $bGuess, textColor: .blue)
+            }
+            .padding(.horizontal)
+            .padding(.bottom)
         }
-        .padding()
     }
     
     func computeScore() -> Int {
@@ -64,6 +79,9 @@ struct RGBSlider: View {
         HStack {
             Text("0").foregroundColor(textColor)
             Slider(value: $value)
+                .accentColor(textColor)
+                .background(textColor)
+                .cornerRadius(10.0)
             Text("255").foregroundColor(textColor)
         }
     }
@@ -76,5 +94,25 @@ struct RGBullView_Previews: PreviewProvider {
                 .previewDevice("iPhone SE (2nd generation)")
                 .previewLayout(.fixed(width: 568, height: 320))
         }
+    }
+}
+
+class TimeCounter: ObservableObject {
+  var timer: Timer?
+  @Published var counter = 0
+
+  @objc func updateCounter() {
+    counter += 1
+  }
+    
+    init() {
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self,
+                                     selector: #selector(updateCounter), userInfo: nil,
+                                     repeats: true)
+    }
+    
+    func killTimer() {
+      timer?.invalidate()
+      timer = nil
     }
 }
