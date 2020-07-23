@@ -78,10 +78,10 @@ struct RGBSlider: View {
     var body: some View {
         HStack {
             Text("0").foregroundColor(textColor)
-            Slider(value: $value)
-                .accentColor(textColor)
-                .background(textColor)
-                .cornerRadius(10.0)
+            CustomSlider(thumbColor: UIColor(textColor),
+                         minTrackColor: UIColor(textColor),
+                         maxTrackColor: .clear,
+                         value: $value)
             Text("255").foregroundColor(textColor)
         }
     }
@@ -114,5 +114,50 @@ class TimeCounter: ObservableObject {
     func killTimer() {
       timer?.invalidate()
       timer = nil
+    }
+}
+
+struct CustomSlider: UIViewRepresentable {
+//    typealias UIViewType = UISlider
+    
+    let thumbColor: UIColor
+    let minTrackColor: UIColor
+    let maxTrackColor: UIColor
+
+    @Binding var value: Double
+    
+    func makeUIView(context: Context) -> UISlider {
+        let slider = UISlider()
+        
+        slider.thumbTintColor = thumbColor
+        slider.minimumTrackTintColor = minTrackColor
+        slider.maximumTrackTintColor = maxTrackColor
+        slider.value = Float(value)
+        
+        slider.addTarget(context.coordinator,
+                         action: #selector(CustomSliderCoordinator.updateColorUISlider(_:)),
+                         for: .valueChanged)
+        
+        return slider
+    }
+    
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+        uiView.value = Float(value)
+    }
+    
+    func makeCoordinator() -> CustomSliderCoordinator {
+        return CustomSliderCoordinator(self)
+    }
+}
+
+class CustomSliderCoordinator: NSObject {
+    var parent: CustomSlider
+    
+    init(_ parent: CustomSlider) {
+        self.parent = parent
+    }
+    
+    @objc func updateColorUISlider(_ sender: UISlider) {
+        parent.value = Double(sender.value)
     }
 }
